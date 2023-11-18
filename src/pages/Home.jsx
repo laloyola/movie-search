@@ -7,7 +7,7 @@ const StyledWelcome = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 10px;
 `;
 
@@ -36,7 +36,9 @@ const StyledOption = styled.div`
 const Home = () => (
   <main>
     <StyledWelcome>
-      <h1>Welcome to the Home Page</h1>
+      <h1>Welcome to the L&apos;Movies Home Page</h1>
+      <br />
+      <h2>What would you like to see?</h2>
       <StyledOptions>
         <StyledOption>Movies</StyledOption>
         <StyledOption>TV Shows</StyledOption>
