@@ -38,6 +38,8 @@ const Navbar = () => (
   <StyledNavbar>
     <StyledHomeLink to="/">L&apos;Movies</StyledHomeLink>
     <StyledLink to="/movies">Movies</StyledLink>
+    <StyledLink to="/shows">TV Shows</StyledLink>
+    <StyledLink to="/actors">Actors/actresses</StyledLink>
   </StyledNavbar>
 );
 
