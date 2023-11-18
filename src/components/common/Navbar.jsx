@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 const StyledNavbar = styled.nav`
   background-color: ${({ theme }) => theme.primaryColor};
-  padding: 10px;
+  height: 40px;
+  padding: 20px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -12,20 +13,30 @@ const StyledNavbar = styled.nav`
   flex-direction: row;
 `;
 
-const StyledLink = styled(Link)`
+const StyledHomeLink = styled(Link)`
+  font-size: 40px;
+  display: flex;
   text-decoration: none;
-  margin: 10px;
-  padding: 10px;
+  align-items: center;
   color: ${({ theme }) => theme.textColor};
-  border: 1px solid ${({ theme }) => theme.backgroundColor};
-  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 20px;
+  text-align: center;
+  width: 150px;
+  align-self: center;
+  text-decoration: none;
+  color: ${({ theme }) => theme.textColor};
   font-weight: bold;
   cursor: pointer;
 `;
 
 const Navbar = () => (
   <StyledNavbar>
-    <StyledLink to="/">Home</StyledLink>
+    <StyledHomeLink to="/">L&apos;Movies</StyledHomeLink>
     <StyledLink to="/movies">Movies</StyledLink>
   </StyledNavbar>
 );
