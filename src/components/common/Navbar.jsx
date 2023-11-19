@@ -11,6 +11,7 @@ const StyledNavbar = styled.nav`
   z-index: 1;
   display: flex;
   flex-direction: row;
+  gap: 40px;
 `;
 
 const StyledHomeLink = styled(Link)`
@@ -26,7 +27,6 @@ const StyledHomeLink = styled(Link)`
 const StyledLink = styled(Link)`
   font-size: 20px;
   text-align: center;
-  width: 150px;
   align-self: center;
   text-decoration: none;
   color: ${({ theme }) => theme.textColor};
