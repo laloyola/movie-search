@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { getNowPlayingMovies } from '../services/movies';
 
 const Container = styled.div`
   display: flex;
@@ -25,28 +26,34 @@ const List = styled.div`
   width: 300px;
 `;
 
-const Movies = () => (
-  <Container>
-    <h1>Movies</h1>
-    <ListsContainer>
-      <List>
-        <h2>Now Playing</h2>
-        <p>Movies playing now</p>
-      </List>
-      <List>
-        <h2>Popular</h2>
-        <p>Popular movies</p>
-      </List>
-      <List>
-        <h2>Top Rated</h2>
-        <p>Top rated movies</p>
-      </List>
-      <List>
-        <h2>Upcoming</h2>
-        <p>Upcoming movies</p>
-      </List>
-    </ListsContainer>
-  </Container>
-);
+const Movies = () => {
+  useEffect(() => {
+    getNowPlayingMovies();
+  }, []);
+
+  return (
+    <Container>
+      <h1>Movies</h1>
+      <ListsContainer>
+        <List>
+          <h2>Now Playing</h2>
+          <p>Movies playing now</p>
+        </List>
+        <List>
+          <h2>Popular</h2>
+          <p>Popular movies</p>
+        </List>
+        <List>
+          <h2>Top Rated</h2>
+          <p>Top rated movies</p>
+        </List>
+        <List>
+          <h2>Upcoming</h2>
+          <p>Upcoming movies</p>
+        </List>
+      </ListsContainer>
+    </Container>
+  );
+};
 
 export default Movies;
