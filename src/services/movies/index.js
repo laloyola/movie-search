@@ -11,11 +11,9 @@ export const getNowPlayingMovies = async () => {
     },
   };
 
-  axios
+  return axios
     .request(options)
-    .then((response) => {
-      console.log(response.data);
-    })
+    .then((response) => response.data)
     .catch((error) => {
       console.error(error);
     });
@@ -30,9 +28,7 @@ export const getPopularMovies = async () => {
   };
   axios
     .request(options)
-    .then((response) => {
-      console.log(response.data);
-    })
+    .then((response) => response.data)
     .catch((error) => {
       console.error(error);
     });
