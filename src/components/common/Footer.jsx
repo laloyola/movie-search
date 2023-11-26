@@ -3,10 +3,8 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   background-color: ${({ theme }) => theme.primaryColor};
-  padding: 10px;
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
   width: 100%;
 `;
 
