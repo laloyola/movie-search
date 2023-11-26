@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import MovieCard from '../components/MovieCard';
 import { getNowPlayingMovies } from '../services/movies';
 
 const Container = styled.div`
@@ -27,8 +28,14 @@ const List = styled.div`
 `;
 
 const Movies = () => {
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+
   useEffect(() => {
-    getNowPlayingMovies();
+    const fetchNowPlayingMovies = async () => {
+      const nowPlayingList = await getNowPlayingMovies();
+      setNowPlayingMovies(nowPlayingList.results);
+    };
+    fetchNowPlayingMovies();
   }, []);
 
   return (
@@ -36,8 +43,14 @@ const Movies = () => {
       <h1>Movies</h1>
       <ListsContainer>
         <List>
-          <h2>Now Playing</h2>
-          <p>Movies playing now</p>
+          <h1>Now Playing</h1>
+          {nowPlayingMovies.length ? (
+            nowPlayingMovies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
         </List>
         <List>
           <h2>Popular</h2>
