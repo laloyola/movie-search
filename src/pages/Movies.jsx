@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MovieCard from '../components/MovieCard';
-import { getNowPlayingMovies } from '../services/movies';
+import {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+} from '../services/movies';
 
 const Container = styled.div`
   display: flex;
@@ -29,41 +34,46 @@ const List = styled.div`
 
 const Movies = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
 
   useEffect(() => {
-    const fetchNowPlayingMovies = async () => {
-      const nowPlayingList = await getNowPlayingMovies();
-      setNowPlayingMovies(nowPlayingList.results);
+    const fetchMovies = async () => {
+      const moviesLists = Promise.all([
+        getNowPlayingMovies(),
+        getPopularMovies(),
+        getTopRatedMovies(),
+        getUpcomingMovies(),
+      ]).then((lists) => lists.map((list) => list.results));
+      const [nowPlaying, popular, topRated, upcoming] = await moviesLists;
+      setNowPlayingMovies(nowPlaying);
+      setPopularMovies(popular);
+      setTopRatedMovies(topRated);
+      setUpcomingMovies(upcoming);
     };
-    fetchNowPlayingMovies();
+    fetchMovies();
   }, []);
 
   return (
     <Container>
       <h1>Movies</h1>
       <ListsContainer>
-        <List>
-          <h1>Now Playing</h1>
-          {nowPlayingMovies.length ? (
-            nowPlayingMovies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))
-          ) : (
-            <p>Loading...</p>
-          )}
-        </List>
-        <List>
-          <h2>Popular</h2>
-          <p>Popular movies</p>
-        </List>
-        <List>
-          <h2>Top Rated</h2>
-          <p>Top rated movies</p>
-        </List>
-        <List>
-          <h2>Upcoming</h2>
-          <p>Upcoming movies</p>
-        </List>
+        {[
+          [nowPlayingMovies, 'Now Playing'],
+          [popularMovies, 'Popular'],
+          [topRatedMovies, 'Top Rated'],
+          [upcomingMovies, 'Upcoming'],
+        ].map(([list, listName]) => (
+          <List key={listName}>
+            <h1>{listName}</h1>
+            {list.length ? (
+              list.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+            ) : (
+              <p>Loading...</p>
+            )}
+          </List>
+        ))}
       </ListsContainer>
     </Container>
   );
